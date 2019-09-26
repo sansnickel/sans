@@ -1,0 +1,28 @@
+.APISelect {
+
+    background-color: #ececec;
+    display: flex;
+    flex-direction: column;
+
+    button { 
+        height: 100px; 
+        width: 100%;
+        background-size: cover;
+        background-size: 50%;
+        background-repeat: no-repeat;
+        background-position: center;   
+        background-color: #ececec;
+        border-radius: 5px;
+        border: 0;
+        padding: 0;
+        outline: none;
+
+        &:hover {
+            background-color: white;
+        }
+
+        &.selected {
+            background-color: red;
+        }
+    }  
+}
