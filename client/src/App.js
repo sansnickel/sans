@@ -55,6 +55,7 @@ class App extends Component {
             <input className="Form__Searchbar" type="text" value={query} onChange={this.handleChange} placeholder="Search anything..." />
             <input className="Form__Submit" type="submit" value="&rarr;" />
           </form>
+          Hello testing
           {mainComponent}
           <FactOfTheDay />
           <Notes />
