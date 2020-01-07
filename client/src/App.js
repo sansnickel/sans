@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.scss';
+import axios from 'axios';
 import FactOfTheDay from './components/FactOfTheDay/FactOfTheDay';
 import APISelect from './components/APISelect/APISelect';
 import WolframAlpha from './components/WolframAlpha/WolframAlpha';
 import Weather from './components/Weather/Weather';
 import Notes from './components/Notes/Notes';
+
+if (process.env.NODE_ENV === 'production') axios.defaults.baseURL = '192.168.0.45';
 
 class App extends Component {
   constructor(props) {
