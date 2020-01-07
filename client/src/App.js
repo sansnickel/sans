@@ -8,7 +8,7 @@ import WolframAlpha from './components/WolframAlpha/WolframAlpha';
 import Weather from './components/Weather/Weather';
 import Notes from './components/Notes/Notes';
 
-if (process.env.NODE_ENV === 'production') axios.defaults.baseURL = '192.168.0.45';
+if (process.env.NODE_ENV === 'production') axios.defaults.baseURL = 'http://192.168.0.45';
 
 class App extends Component {
   constructor(props) {
