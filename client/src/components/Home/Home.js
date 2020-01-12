@@ -7,18 +7,22 @@ const axios = require('axios');
 class Home extends Component {
 
   static turnOn() {
-    axios.get('/lights/on')
-      .then((res) => {
-      })
+    console.log('requesting on');
+    axios.put('/lights/on')
+      // .then(() => {
+      // })
       .catch((err) => {
+        console.log(err);
       });
   }
 
   static turnOff() {
-    axios.get('/lights/off')
-      .then((res) => {
-      })
+    console.log('requesting off');
+    axios.put('/lights/off')
+      // .then((res) => {
+      // })
       .catch((err) => {
+        console.log(err);
       });
   }
 
