@@ -17,7 +17,7 @@ class App extends Component {
     this.state = {
       query: '',
       submittedQuery: '',
-      api: 'League',
+      api: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -47,7 +47,7 @@ class App extends Component {
       case 'Wolfram': mainComponent = <WolframAlpha query={submittedQuery} />; break;
       case 'Weather': mainComponent = <Weather query={submittedQuery} />; break;
       case 'Home': mainComponent = <Home />; break;
-      default: mainComponent = <WolframAlpha query={submittedQuery} />;
+      default: mainComponent = <Home />; break;
     }
 
     return (

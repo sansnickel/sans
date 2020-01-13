@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "301b27fa1978484212d1b5b22e340256",
+    "revision": "26f46f65d952e2888c0cf6dc463d7f99",
     "url": "/index.html"
   },
   {
-    "revision": "507d7d8fbd58829ebf5e",
+    "revision": "7c77bd9ab1c5d7fb4b62",
     "url": "/static/css/main.91358a89.chunk.css"
   },
   {
-    "revision": "4d81942c3cba8a36113a",
-    "url": "/static/js/2.95b0cad4.chunk.js"
+    "revision": "4ad487d80748cf1064d5",
+    "url": "/static/js/2.50df5de4.chunk.js"
   },
   {
-    "revision": "507d7d8fbd58829ebf5e",
-    "url": "/static/js/main.bc9981fe.chunk.js"
+    "revision": "7c77bd9ab1c5d7fb4b62",
+    "url": "/static/js/main.e6d4748b.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -24,8 +24,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/Dictionary.48c2d1b5.png"
   },
   {
-    "revision": "059ada6006a1eca476309b6c5a1589d0",
-    "url": "/static/media/League.059ada60.png"
+    "revision": "3ab4c899901765c6b25ecb173423a603",
+    "url": "/static/media/Home.3ab4c899.svg"
   },
   {
     "revision": "0d0345f662a757ef17eef497fa8e83fc",

@@ -54,8 +54,10 @@ class Home extends Component {
     }
     function showResult() {
       const pods = [];
-      pods.push(<h3>{s.lights[0].deviceInfo.label}</h3>);
-      pods.push(<h4>{s.lights[0].ip}</h4>);
+      if  (s.lights.length >= 1) {
+        pods.push(<h3>{s.lights[0].deviceInfo.label}</h3>);
+        pods.push(<h4>{s.lights[0].ip}</h4>);
+      }
       return pods;
     }
 

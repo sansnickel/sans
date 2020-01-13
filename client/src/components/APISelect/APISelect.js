@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './APISelect.scss';
-import LeagueLogo from '../../assets/League.png';
+import HomeLogo from '../../assets/Home.svg';
 import WolframLogo from '../../assets/Wolfram.png';
 import WeatherLogo from '../../assets/Weather.png';
 import DictionaryLogo from '../../assets/Dictionary.png';
@@ -12,7 +12,7 @@ import TranslinkLogo from '../../assets/Translink.png';
 class APISelect extends Component {
   constructor(props) {
     super(props);
-    this.state = { api: '' };
+    this.state = { api: 'Home' };
     this.changeAPI = this.changeAPI.bind(this);
   }
 
@@ -24,21 +24,20 @@ class APISelect extends Component {
 
   render() {
     const imageSources = {
-      League: `url( ${LeagueLogo} )`,
+      Home: `url( ${HomeLogo} )`,
       Wolfram: `url( ${WolframLogo} )`,
       Weather: `url( ${WeatherLogo} )`,
       Dictionary: `url( ${DictionaryLogo} )`,
       Translink: `url( ${TranslinkLogo} )`,
-      Home: `url( ${LeagueLogo} )`,
-      b: `url( ${WolframLogo} )`,
-      c: `url( ${WeatherLogo} )`,
-      d: `url( ${DictionaryLogo} )`,
-      e: `url( ${TranslinkLogo} )`,
-      g: `url( ${LeagueLogo} )`,
-      h: `url( ${WolframLogo} )`,
-      i: `url( ${WeatherLogo} )`,
-      j: `url( ${DictionaryLogo} )`,
-      k: `url( ${TranslinkLogo} )`,
+      // b: `url( ${WolframLogo} )`,
+      // c: `url( ${WeatherLogo} )`,
+      // d: `url( ${DictionaryLogo} )`,
+      // e: `url( ${TranslinkLogo} )`,
+      // g: `url( ${HomeLogo} )`,
+      // h: `url( ${WolframLogo} )`,
+      // i: `url( ${WeatherLogo} )`,
+      // j: `url( ${DictionaryLogo} )`,
+      // k: `url( ${TranslinkLogo} )`,
     };
 
     const optionList = [];
