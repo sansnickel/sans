@@ -7,6 +7,8 @@ import APISelect from './components/APISelect/APISelect';
 import WolframAlpha from './components/WolframAlpha/WolframAlpha';
 import Weather from './components/Weather/Weather';
 import Notes from './components/Notes/Notes';
+import Translink from './components/Translink/Translink';
+import Smart from './components/Smart/Smart';
 import Home from './components/Home/Home';
 
 if (process.env.NODE_ENV === 'production') axios.defaults.baseURL = 'http://192.168.0.45:3001';
@@ -46,6 +48,8 @@ class App extends Component {
     switch (api) {
       case 'Wolfram': mainComponent = <WolframAlpha query={submittedQuery} />; break;
       case 'Weather': mainComponent = <Weather query={submittedQuery} />; break;
+      case 'Translink': mainComponent = <Translink query={submittedQuery} />; break;
+      case 'Smart': mainComponent = <Smart />; break;
       case 'Home': mainComponent = <Home />; break;
       default: mainComponent = <Home />; break;
     }

@@ -29,6 +29,7 @@ class APISelect extends Component {
       Weather: `url( ${WeatherLogo} )`,
       Dictionary: `url( ${DictionaryLogo} )`,
       Translink: `url( ${TranslinkLogo} )`,
+      Smart: `url( ${HomeLogo} )`,
       // b: `url( ${WolframLogo} )`,
       // c: `url( ${WeatherLogo} )`,
       // d: `url( ${DictionaryLogo} )`,

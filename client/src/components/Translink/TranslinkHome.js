@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './Weather.scss';
+import './TranslinkHome.scss';
 import LoadingLogo from '../../assets/Loading.gif';
 
 const axios = require('axios');
 
-class Weather extends Component {
+class TranslinkHome extends Component {
   constructor(props) {
     super(props);
 
@@ -15,7 +15,20 @@ class Weather extends Component {
   }
 
   componentDidMount() {
-    this.setState({ loaded: true });
+    const p = this.props;
+    axios.get('/bus', {
+      params: {
+        busno: p.query,
+      },
+    }).then((res) => {
+      this.setState({
+        result: res.data,
+        loaded: true,
+      });
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -23,9 +36,9 @@ class Weather extends Component {
 
     if (p.query && ((prevProps.query !== p.query))) {
       this.setState({ loaded: false });
-      axios.get('/weather', {
+      axios.get('/bus', {
         params: {
-          q: p.query,
+          busno: p.query,
         },
       }).then((res) => {
         this.setState({
@@ -46,22 +59,27 @@ class Weather extends Component {
     }
     function showResult() {
       const pods = [];
-      const data = s.result.list;
+      const data = s.result;
       if (data) {
         for (let i = 0; i < data.length; i += 1) {
-          pods.push(<h2>{data[i].dt_txt}</h2>);
-          pods.push(<h2>{data[i].weather[0].description}</h2>);
+          pods.push(<h2>{data[i].RouteNo}</h2>);
+          const times = data[i].Schedules;
+          if (times) {
+            for (let i = 0; i < times.length; i += 1) {
+              pods.push(<h3>{times[i].ExpectedLeaveTime}</h3>)
+            }
+          }
         }
       }
       return pods;
     }
 
     return (
-      <div className="WeatherComponent">
+      <div className="TranslinkHomeComponent">
         { s.loaded === true ? showResult() : showLogo() }
       </div>
     );
   }
 }
 
-export default Weather;
+export default TranslinkHome;
