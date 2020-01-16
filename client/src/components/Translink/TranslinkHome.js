@@ -19,8 +19,8 @@ class TranslinkHome extends Component {
     axios.get('/bus', {
       params: {
         busno: p.query,
-        timeframe: 120,
-        count: 4,
+        timeframe: 1440,
+        count: 10,
       },
     }).then((res) => {
       this.setState({
@@ -40,8 +40,9 @@ class TranslinkHome extends Component {
       this.setState({ loaded: false });
       axios.get('/bus', {
         params: {
+          timeframe: 1440,
           busno: p.query,
-          count: 4,
+          count: 10,
         },
       }).then((res) => {
         this.setState({

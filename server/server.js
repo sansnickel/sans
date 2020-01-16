@@ -124,11 +124,12 @@ app.get('/weather', function (req, res) {
 });
 
 app.get('/bus', (req, res) => {
+  console.log( req.query.count );
   axios.get('https://api.translink.ca/rttiapi/v1/stops/' + req.query.busno + '/estimates', {
     params: {
       'content-type': 'application/JSON',
-      timeframe: 1440,
-      count: 10,
+      timeframe: req.query.timeframe,
+      count: req.query.count,
       apIKey: process.env.TRANSLINK_KEY
     }
   })
