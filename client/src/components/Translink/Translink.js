@@ -26,6 +26,7 @@ class Translink extends Component {
       axios.get('/bus', {
         params: {
           busno: p.query,
+          count: 10,
         },
       }).then((res) => {
         this.setState({

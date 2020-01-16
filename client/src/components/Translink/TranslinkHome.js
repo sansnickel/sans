@@ -19,6 +19,8 @@ class TranslinkHome extends Component {
     axios.get('/bus', {
       params: {
         busno: p.query,
+        timeframe: 120,
+        count: 4,
       },
     }).then((res) => {
       this.setState({
@@ -39,6 +41,7 @@ class TranslinkHome extends Component {
       axios.get('/bus', {
         params: {
           busno: p.query,
+          count: 4,
         },
       }).then((res) => {
         this.setState({
@@ -62,13 +65,16 @@ class TranslinkHome extends Component {
       const data = s.result;
       if (data) {
         for (let i = 0; i < data.length; i += 1) {
-          pods.push(<h2>{data[i].RouteNo}</h2>);
+          const busno = [];
+          busno.push(<div className="routeNo">{data[i].RouteNo}</div>);
           const times = data[i].Schedules;
           if (times) {
-            for (let i = 0; i < times.length; i += 1) {
-              pods.push(<h3>{times[i].ExpectedLeaveTime}</h3>)
+            for (let j = 0; j < times.length; j += 1) {
+              const indexm = times[j].ExpectedLeaveTime.indexOf('m');
+              busno.push(<div className="routeNo__time">{times[j].ExpectedLeaveTime.substring(0, indexm + 1)}</div>);
             }
           }
+          pods.push(<div className="stopNo">{busno}</div>);
         }
       }
       return pods;

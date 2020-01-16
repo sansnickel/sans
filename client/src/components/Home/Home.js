@@ -17,12 +17,15 @@ class Home extends Component {
   }
 
   render() {
-    const busno = 61330;
 
     return (
       <div className="Home">
         <Smart />
-        <TranslinkHome query={busno} />
+        <div className="TranslinkHome">
+          <TranslinkHome query={52084} />
+          <TranslinkHome query={61330} />
+          <TranslinkHome query={51333} />
+        </div>
       </div>
     );
   }
