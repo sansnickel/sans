@@ -41,16 +41,28 @@ class Weather extends Component {
 
   render() {
     const s = this.state;
+
     function showLogo() {
       return <img src={LoadingLogo} alt="" />;
     }
+
     function showResult() {
       const pods = [];
       const data = s.result.list;
       if (data) {
         for (let i = 0; i < data.length; i += 1) {
-          pods.push(<h2>{data[i].dt_txt}</h2>);
-          pods.push(<h2>{data[i].weather[0].description}</h2>);
+          pods.push(
+            <h2>
+              {new Date(`${data[i].dt_txt} UTC`).toLocaleString()}
+            </h2>,
+          );
+          pods.push(<h3>{data[i].weather[0].description}</h3>);
+          pods.push(
+            <h3>
+              {Math.round(data[i].main.temp - 273.15)}
+              °C
+            </h3>,
+          );
         }
       }
       return pods;
