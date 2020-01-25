@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject", 
-    "deploy": "ssh pi@192.168.0.45 \"cd Repos/sans/server && npm install && sudo git pull\""
+    "deploy": "git push pi && ssh pi@192.168.0.45 \"cd Repos/sans/client && npm run build\""
   },
   "eslintConfig": {
     "extends": "react-app"
