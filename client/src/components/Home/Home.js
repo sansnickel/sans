@@ -26,6 +26,7 @@ class Home extends Component {
           <TranslinkHome query={61330} />
           <TranslinkHome query={51333} />
         </div>
+        Test
       </div>
     );
   }
