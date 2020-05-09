@@ -6,7 +6,7 @@ const axios = require('axios');
 class FactOfTheDay extends Component {
   constructor(props) {
     super(props);
-    this.state = { result: 'test' };
+    this.state = { result: ' ' };
   }
 
   componentDidMount() {
@@ -21,9 +21,9 @@ class FactOfTheDay extends Component {
     const myvar = this.state;
     return (
       <div className="FactOfTheDay">
-        <div className="FactOfTheDay__title">
+        {/* <div className="FactOfTheDay__title">
           Fact Of The Day
-        </div>
+        </div> */}
         <div className="FactOfTheDay__content">
           { myvar.result }
         </div>

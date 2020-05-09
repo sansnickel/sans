@@ -1,0 +1,14 @@
+.Search {
+
+    &__bar {
+        background: #eeeeee;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid var(--color-black);
+        height: 40px;
+        font-size: 20px;
+    }
+    &__submit {
+        display: none;
+    }
+}

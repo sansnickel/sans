@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Search from '../Search/Search';
 import './WolframAlpha.scss';
 import LoadingLogo from '../../assets/Loading.gif';
 
@@ -10,52 +11,54 @@ class WolframAlpha extends Component {
 
     this.state = {
       result: '',
-      loaded: false,
+      loaded: true,
       fullResult: false,
     };
 
+    this.doSearch = this.doSearch.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ loaded: true });
+    // this.setState({ loaded: true });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const p = this.props;
+  componentDidUpdate() {
+
+  }
+
+  doSearch(query) {
     const s = this.state;
 
-    if (p.query && ((prevProps.query !== p.query) || (prevState.fullResult !== s.fullResult))) {
-      this.setState({ loaded: false });
-      if (s.fullResult !== true) {
-        axios.get('/wolfram', {
-          params: {
-            q: p.query,
-          },
-        }).then((res) => {
-          this.setState({
-            result: res.data,
-            loaded: true,
-          });
-          console.log(res);
-        }).catch((err) => {
-          console.log(err);
+    this.setState({ loaded: false });
+    if (s.fullResult !== true) {
+      axios.get('/wolfram', {
+        params: {
+          q: query,
+        },
+      }).then((res) => {
+        this.setState({
+          result: res.data,
+          loaded: true,
         });
-      } else {
-        axios.get('/wolfram2', {
-          params: {
-            q: p.query,
-          },
-        }).then((res) => {
-          this.setState({
-            result: res.data,
-            loaded: true,
-          });
-          console.log(res);
-        }).catch((err) => {
-          console.log(err);
+        console.log(res);
+      }).catch((err) => {
+        console.log(err);
+      });
+    } else {
+      axios.get('/wolfram2', {
+        params: {
+          q: query,
+        },
+      }).then((res) => {
+        this.setState({
+          result: res.data,
+          loaded: true,
         });
-      }
+        console.log(res);
+      }).catch((err) => {
+        console.log(err);
+      });
     }
   }
 
@@ -67,17 +70,19 @@ class WolframAlpha extends Component {
 
     this.setState({
       [n]: value,
-      loaded: false,
     });
   }
 
   render() {
     const s = this.state;
+
+    const hasContent = (s.result === '' && s.loaded === true) ? 'hidden' : '';
+
     function showLogo() {
-      return <img src={LoadingLogo} alt="" />;
+      return <img className="loadinglogo" src={LoadingLogo} alt="" />;
     }
     function showResult() {
-      if (s.fullResult !== true) {
+      if (!Array.isArray(s.result)) {
         return s.result;
       }
 
@@ -92,10 +97,19 @@ class WolframAlpha extends Component {
     }
 
     return (
-      <div className="WolframComponent">
-        <input name="fullResult" type="checkbox" checked={s.fullResult} onChange={this.handleInputChange} />
-          Show Full Result?
-        { s.loaded === true ? showResult() : showLogo() }
+      <div className="Wolfram">
+        <div className="Wolfram__search">
+          <div className="Wolfram__search__bar">
+            <Search doSearch={this.doSearch} />
+          </div>
+          <div className="Wolfram__search__full">
+            <input name="fullResult" type="checkbox" checked={s.fullResult} onChange={this.handleInputChange} />
+            Show Full Result?
+          </div>
+        </div>
+        <div className={`Wolfram__result ${hasContent}`}>
+          { s.loaded === true ? showResult() : showLogo() }
+        </div>
       </div>
     );
   }

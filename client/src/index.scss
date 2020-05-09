@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
-html, body {
-  overflow: hidden;
+// html, body {
+//   overflow: hidden;
+// }
+
+:root {
+  --color-black: #000000;
+  --color-white: #FFFFFF;
 }

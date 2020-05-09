@@ -1,4 +1,27 @@
-.TranslinkHome {
+.Home {
     display: flex;
+    flex-wrap: wrap;
 
+    &__container {
+        flex: 1 0 100%;
+
+        &__section {
+            padding: 32px;
+        }
+    
+        &__translink {
+            display: flex;
+            flex-wrap: wrap;
+    
+            @media screen and (max-width: 767px) {
+                justify-content: space-between;
+            }
+        }
+        &__smart {
+            background: #eeeeee;
+        }
+        &__fact {
+            padding: 0;
+        }
+    }
 }

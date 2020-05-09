@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Home.scss';
 import TranslinkHome from '../Translink/TranslinkHome';
 import Smart from '../Smart/Smart';
+import FactOfTheDay from '../FactOfTheDay/FactOfTheDay';
 
 
 class Home extends Component {
@@ -17,14 +18,24 @@ class Home extends Component {
   }
 
   render() {
-
     return (
       <div className="Home">
-        <Smart />
-        <div className="TranslinkHome">
-          <TranslinkHome query={52084} />
-          <TranslinkHome query={61330} />
-          <TranslinkHome query={51333} />
+        <div className="Home__container Home__container--fact">
+          <div className="Home__container__fact Home__container__section">
+            <FactOfTheDay />
+          </div>
+        </div>
+        <div className="Home__container">
+          <div className="Home__container__smart Home__container__section">
+            <Smart />
+          </div>
+        </div>
+        <div className="Home__container">
+          <div className="Home__container__translink Home__container__section">
+            <TranslinkHome query={52084} on="Garden City Rd" at="Cambie Rd" />
+            <TranslinkHome query={61330} on="Bridgeport" at="Bay 11" />
+            <TranslinkHome query={51333} on="Knight St" at="E47 Ave" />
+          </div>
         </div>
       </div>
     );

@@ -1,4 +1,30 @@
-.WolframComponent {
+.Wolfram {
+    padding: 32px;
+    background: #eeeeee;
+    min-height: calc(100vh - 203px);
+    margin-bottom: 139px;
+    @media screen and (max-width: 767px) {
+        margin-bottom: calc(100% / 6);
+    }
+
+    &__search {
+        &__full {
+            padding: 16px 0;
+        }
+    }
+    &__result {
+        display: flex;
+        flex-direction: column;
+        background: var(--color-white);
+        padding: 32px;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        align-items: flex-start;
+
+        &.hidden {
+            display: none;
+        }
+    }
    
 }
 

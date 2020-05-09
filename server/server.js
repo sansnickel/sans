@@ -7,6 +7,11 @@ const port = process.env.PORT || 3001;
 const axios = require('axios');
 
 const Lifx  = require('node-lifx-lan');
+const bodyParser = require('body-parser');
+
+global.devices = [];
+
+app.use(bodyParser.json());
 
 app.use(cors({
   origin: 'http://192.168.0.45:3000'
@@ -51,18 +56,16 @@ app.get('/randomfact', function (req, res) {
   axios.get('http://numbersapi.com/random/trivia')
     .then(function (response) {
       res.json( response.data );
-      console.log( response.data );
+      // console.log( response.data );
     })
     .catch(function (error) {
       res.json( 'Life sucks.' );
-      console.log( error );
+      // console.log( error );
     });
 
 });
 
 app.get('/wolfram', function (req, res) {
-
-  console.log( req );
 
   axios.get('http://api.wolframalpha.com/v1/result', {
     params: {
@@ -72,18 +75,16 @@ app.get('/wolfram', function (req, res) {
   })
   .then(function (response) {
     res.json( response.data );
-    console.log( response.data );
+    // console.log( response.data );
   })
   .catch(function (error) {
     res.json( error.response.data );
-    console.log( error );
+    // console.log( error );
   });
 
 });
 
 app.get('/wolfram2', function (req, res) {
-
-  console.log( req );
 
   axios.get('http://api.wolframalpha.com/v2/query', {
     params: {
@@ -94,12 +95,16 @@ app.get('/wolfram2', function (req, res) {
     }
   })
   .then(function (response) {
-    res.json( response.data.queryresult.pods );
-    console.log( response.data.queryresult.pods );
+    
+    if ( response.data.queryresult.success === false ) {
+      res.json ( 'Wolfram|Alpha did not understand your input' );
+    } else {
+      res.json( response.data.queryresult.pods );
+    }
   })
   .catch(function (error) {
     res.json( error.response.data );
-    console.log( error );
+    // console.log( error );
   });
 
 });
@@ -109,6 +114,7 @@ app.get('/weather', function (req, res) {
     params: {
       q: req.query.q,
       mode: 'json',
+      units: 'metric',
       appid: process.env.WEATHER_KEY,
     }
   })
@@ -118,13 +124,13 @@ app.get('/weather', function (req, res) {
   })
   .catch(function (error) {
     res.json( error.response.data );
-    console.log( error );
+    // console.log( error );
   });
 
 });
 
 app.get('/bus', (req, res) => {
-  console.log( req.query.count );
+  // console.log( req.query.count );
   axios.get('https://api.translink.ca/rttiapi/v1/stops/' + req.query.busno + '/estimates', {
     params: {
       'content-type': 'application/JSON',
@@ -135,54 +141,140 @@ app.get('/bus', (req, res) => {
   })
   .then(function (response) {
     res.json( response.data );
-    console.log( response.data );
+    // console.log( response.data );
   })
   .catch(function ( error ) {
     res.json( error.response.data );
-    console.log( error );
+    // console.log( error );
   })
 })
 
-
 app.get('/lights/', function (req, res) {
-  Lifx.discover().then((device_list) => {
-    return device_list;
-    // let device_arr;
-    // device_list.forEach((device) => {
-    //   device_arr.push([
-    //     device['ip'],
-    //     device['mac'],
-    //     device['deviceInfo']['label']
-    //   ].join(' | '));
-    // });
-  }).then(( response ) => {
-    console.log(JSON.stringify(response, null, '  '));
+  if ( devices.length >= 1 ) {
+    res.json(devices);
+  } else {
+    Lifx.discover().then((device_list) => {
+      devices = device_list;
+      return device_list;
+      // let device_arr;
+      // device_list.forEach((device) => {
+      //   device_arr.push([
+      //     device['ip'],
+      //     device['mac'],
+      //     device['deviceInfo']['label']
+      //   ].join(' | '));
+      // });
+    }).then(( response ) => {
+      // console.log(JSON.stringify(response, null, '  '));
+      res.json( response );
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+
+});
+
+app.get('/lights/state/:index', function (req, res) {
+
+  if ( devices.length <= 0 ) {
+    Lifx.discover().then((device_list) => {
+      devices = device_list;
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+
+  devices[req.params.index].getLightState()
+  .then( (response) => {
+    // console.log(JSON.stringify(response, null, '  '));
     res.json( response );
   }).catch((error) => {
     console.error(error);
-  });
+  })
 });
 
-app.put('/lights/on', function (req, res) {
-  console.log('sending on');
-  Lifx.turnOnBroadcast().then(() => {
+app.put('/lights/brightness/:index', function (req, res) {
+
+  function changeBrightness() {
+    devices[req.params.index].setColor({
+      color: {
+        hue: 0,
+        saturation: 0,
+        brightness: req.body.data.brightness
+      },
+      duration: 1000,
+    })
+    .then(() => {
+      res.status(200).end();
+      console.log('Done!');
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+  if ( devices[req.params.index] === undefined ) {
+    Lifx.discover().then((device_list) => {
+      devices = device_list;
+    }).then(() => {
+      changeBrightness();
+    }).catch((error) => {
+      console.error(error);
+    });
+  } else {
+    changeBrightness();
+  }
+});
+
+app.put('/lights/on/:index', function (req, res) {
+
+  if ( devices.length <= 0 ) {
+    Lifx.discover().then((device_list) => {
+      devices = device_list;
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+
+  devices[req.params.index].turnOn().then(() => {
     res.status(200).end();
     console.log('Done!');
   }).catch((error) => {
     console.error(error);
   });
+
+
+  // Lifx.turnOnBroadcast().then(() => {
+  //   res.status(200).end();
+  //   console.log('Done!');
+  // }).catch((error) => {
+  //   console.error(error);
+  // });
 });
 
-app.put('/lights/off', function (req, res) {
-  console.log('sending off');
-  Lifx.turnOffBroadcast({
-    duration: 1000,
-  }).then(() => {
+app.put('/lights/off/:index', function (req, res) {
+
+  if ( devices.length <= 0 ) {
+    Lifx.discover().then((device_list) => {
+      devices = device_list;
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+
+  devices[req.params.index].turnOff().then(() => {
     res.status(200).end();
     console.log('Done!');
   }).catch((error) => {
     console.error(error);
   });
+
+  // Lifx.turnOffBroadcast({
+  //   duration: 1000,
+  // }).then(() => {
+  //   res.status(200).end();
+  //   console.log('Done!');
+  // }).catch((error) => {
+  //   console.error(error);
+  // });
 });
 
 

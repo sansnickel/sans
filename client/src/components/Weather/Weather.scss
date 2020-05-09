@@ -1,0 +1,74 @@
+.Weather {
+    padding: 32px;
+    background: lightblue;
+    min-height: calc(100vh - 203px);
+    margin-bottom: 139px;
+    @media screen and (max-width: 767px) {
+        margin-bottom: calc(100% / 6);
+    }
+    &__search {
+        .Search {
+            &__bar {
+                background: lightblue;
+            }
+        }
+    }
+    &__result {
+        padding: 32px 0;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 632px;
+
+        @media screen and (max-width: 767px) {
+            width: auto;
+        }
+
+        &__day {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid white;
+            border-radius: 5px;
+            margin-bottom: 32px;
+            width: 100%;
+            &__title {
+                padding: 15px;
+                width: calc(100% - 30px);
+                text-align: center;
+                border-bottom: 1px solid white;
+            }
+            &__times {
+                width: 100%;
+                @media screen and (max-width: 767px) {
+                    overflow-x: scroll;
+                }
+                &__container {
+                    display: flex;
+                    padding: 15px;
+                    width: 602px;
+                    justify-content: flex-end;
+                    @media screen and (max-width: 767px ) {
+                        justify-content: flex-start;
+                    }
+
+                    &__entry {
+                        width: 75px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+
+        path {
+            &::after {
+                content: '👍';
+                position: relative;
+                width: 50px;
+                height: 50px;
+            }
+        }
+    }
+}
