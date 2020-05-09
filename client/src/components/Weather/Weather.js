@@ -106,10 +106,10 @@ class Weather extends Component {
       const days = [];
 
       if (code === '200') {
-        let day = new Date(`${data[0].dt_txt} UTC`).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+        let day = new Date(`${data[0].dt_txt} UTC`).toLocaleString('en-CA', { month: 'short', day: 'numeric' });
 
         for (let i = 0; i < data.length; i += 1) {
-          curday = new Date(`${data[i].dt_txt} UTC`).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+          curday = new Date(`${data[i].dt_txt} UTC`).toLocaleString('en-CA', { month: 'short', day: 'numeric' });
           if (day !== curday) {
             // start new section
             pods[day] = times;
