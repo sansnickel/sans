@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './Weather.scss';
 import Search from '../Search/Search';
 import LoadingLogo from '../../assets/Loading.gif';
-import { Chart } from 'react-charts';
 
 const axios = require('axios');
 
@@ -13,7 +12,6 @@ class Weather extends Component {
     this.state = {
       result: '',
       loaded: true,
-      query: '',
     };
 
     this.doSearch = this.doSearch.bind(this);
@@ -27,7 +25,7 @@ class Weather extends Component {
   }
 
   doSearch(query) {
-    this.setState({ loaded: false, query });
+    this.setState({ loaded: false });
     axios.get('/weather', {
       params: {
         q: query,
