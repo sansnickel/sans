@@ -106,10 +106,10 @@ class Weather extends Component {
       const days = [];
 
       if (code === '200') {
-        let day = new Date(`${data[0].dt_txt} UTC`).toLocaleString('en-CA', { month: 'short', day: 'numeric' });
+        let day = new Date(data[0].dt * 1000).toLocaleString('en-CA', { month: 'short', day: 'numeric' });
 
         for (let i = 0; i < data.length; i += 1) {
-          curday = new Date(`${data[i].dt_txt} UTC`).toLocaleString('en-CA', { month: 'short', day: 'numeric' });
+          curday = new Date(data[i].dt * 1000).toLocaleString('en-CA', { month: 'short', day: 'numeric' });
           if (day !== curday) {
             // start new section
             pods[day] = times;
@@ -119,9 +119,9 @@ class Weather extends Component {
 
           // push pods
           times.push(
-            <div className="Weather__result__day__times__container__entry">
+            <div className="Weather__result__day__times__container__entry" key={data[i].dt}>
               <div className="Weather__result__day__times__container__entry__time">
-                {new Date(`${data[i].dt_txt} UTC`).toLocaleString('en-CA', { hour: 'numeric' })}
+                {new Date(data[i].dt * 1000).toLocaleString('en-CA', { hour: 'numeric' })}
               </div>
               <img src={`http://openweathermap.org/img/wn/${data[i].weather[0].icon}.png`} alt="weather icon" />
               <div className="Weather__result__day__times__container__entry__temp">
@@ -134,7 +134,7 @@ class Weather extends Component {
 
         Object.keys(pods).forEach(key => (
           days.push(
-            <div className="Weather__result__day">
+            <div className="Weather__result__day" key={key}>
               <div className="Weather__result__day__title">
                 {key}
               </div>
@@ -159,7 +159,6 @@ class Weather extends Component {
         </div>
         <div className="Weather__result">
           { s.loaded === true ? showResult() : showLogo() }
-          {/* <div id="openweathermap-widget-11"></div> */}
         </div>
       </div>
     );

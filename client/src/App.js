@@ -45,7 +45,7 @@ class App extends Component {
 
     Object.keys(imageSources).map(
       (keyName, index) => pageList.push(
-        <div className={`App__nav__buttons__container${page === keyName ? ' active' : ''}`}>
+        <div className={`App__nav__buttons__container${page === keyName ? ' active' : ''}`} key={keyName}>
           <div
             role="button"
             tabIndex={index}

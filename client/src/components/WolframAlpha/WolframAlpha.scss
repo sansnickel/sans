@@ -4,6 +4,7 @@
     min-height: calc(100vh - 203px);
     margin-bottom: 139px;
     @media screen and (max-width: 767px) {
+        min-height: calc(100vh - (100vw/6) - 64px);
         margin-bottom: calc(100% / 6);
     }
 

@@ -111,7 +111,7 @@ class Smart extends Component {
       const pods = [];
       for (let i = 0; i < s.lights.length; i += 1) {
         pods.push(
-          <div className="Smart__lights__container">
+          <div className="Smart__lights__container" key={s.lights[i].deviceInfo.label}>
             <div className="Smart__lights__container__light">
               <div className="Smart__lights__container__light__label">{s.lights[i].deviceInfo.label}</div>
               {/* <div className="Smart__lights__container__light__ip">{s.lights[i].ip}</div> */}

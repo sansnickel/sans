@@ -80,7 +80,7 @@ class TranslinkHome extends Component {
         for (let i = 0; i < data.length; i += 1) {
           const busno = [];
           busno.push(
-            <div className="TranslinkHome__stops__stopNo__routeNo">
+            <div className="TranslinkHome__stops__stopNo__routeNo" key={data[i].RouteNo}>
               {data[i].RouteNo}
             </div>,
           );
@@ -95,10 +95,10 @@ class TranslinkHome extends Component {
               } else {
                 timestr = times[j].ExpectedLeaveTime.substring(0, indexm + 1);
               }
-              busno.push(<div className="TranslinkHome__stops__stopNo__routeNo__time">{timestr}</div>);
+              busno.push(<div className="TranslinkHome__stops__stopNo__routeNo__time" key={timestr}>{timestr}</div>);
             }
           }
-          pods.push(<div className="TranslinkHome__stops__stopNo">{busno}</div>);
+          pods.push(<div className="TranslinkHome__stops__stopNo" key={`${data[i].RouteNo}__${busno}`}>{busno}</div>);
         }
       }
       return pods;
