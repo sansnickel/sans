@@ -9,6 +9,7 @@
     font-family: 'PT Mono', monospace;
 
     margin-right: 32px;
+    outline: none;
     
     @media screen and (max-width: 767px) {
         flex: 0 0 45%;
@@ -35,7 +36,7 @@
     &.active {
         .TranslinkHome {
             &__stops {
-                max-height: calc(18px * 11);
+                max-height: calc(19px * 11);
             }
             &__expand {
                 &:after {
@@ -50,20 +51,25 @@
         justify-content: space-between;
         text-align: center;
         flex: 1 0 auto;
-        max-height: calc(18px * 5);
+        max-height: calc(19px * 5);
         overflow: hidden;
         transition: max-height 0.5s ease;
-        margin: 15px;
+        margin: 15px 15px 0 15px;
         width: calc(100% - 30px);
 
         &__stopNo {
             flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             
             &__routeNo {
 
-                &__time {
-                    white-space: pre;
-                }
+                flex: 0 0 19px;
+            }
+            &__time {
+                white-space: pre;
+                flex: 0 0 19px;
             }
         }
     }

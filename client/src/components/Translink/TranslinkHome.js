@@ -18,6 +18,7 @@ class TranslinkHome extends Component {
   }
 
   componentDidMount() {
+
     const p = this.props;
     axios.get('/bus', {
       params: {
@@ -37,26 +38,26 @@ class TranslinkHome extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const p = this.props;
+    // const p = this.props;
 
-    if (p.query && ((prevProps.query !== p.query))) {
-      this.setState({ loaded: false });
-      axios.get('/bus', {
-        params: {
-          timeframe: 1440,
-          busno: p.query,
-          count: 10,
-        },
-      }).then((res) => {
-        this.setState({
-          result: res.data,
-          loaded: true,
-        });
-        console.log(res);
-      }).catch((err) => {
-        console.log(err);
-      });
-    }
+    // if (p.query && ((prevProps.query !== p.query))) {
+    //   this.setState({ loaded: false });
+    //   axios.get('/bus', {
+    //     params: {
+    //       timeframe: 1440,
+    //       busno: p.query,
+    //       count: 10,
+    //     },
+    //   }).then((res) => {
+    //     this.setState({
+    //       result: res.data,
+    //       loaded: true,
+    //     });
+    //     console.log(res);
+    //   }).catch((err) => {
+    //     console.log(err);
+    //   });
+    // }
   }
 
   toggleExpand() {
@@ -95,7 +96,7 @@ class TranslinkHome extends Component {
               } else {
                 timestr = times[j].ExpectedLeaveTime.substring(0, indexm + 1);
               }
-              busno.push(<div className="TranslinkHome__stops__stopNo__routeNo__time" key={timestr}>{timestr}</div>);
+              busno.push(<div className="TranslinkHome__stops__stopNo__time" key={timestr}>{timestr}</div>);
             }
           }
           pods.push(<div className="TranslinkHome__stops__stopNo" key={`${data[i].RouteNo}__${busno}`}>{busno}</div>);

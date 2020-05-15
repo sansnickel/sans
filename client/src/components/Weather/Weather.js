@@ -26,7 +26,7 @@ class Weather extends Component {
 
   doSearch(query) {
     this.setState({ loaded: false });
-    axios.get('/weather', {
+    axios.get('/forecast', {
       params: {
         q: query,
       },
@@ -50,53 +50,6 @@ class Weather extends Component {
     }
 
     function showResult() {
-      // const data = s.result.list;
-      // const code = s.result.cod;
-      // const chartdata = [];
-      // const chart2data = [];
-      // const tempdata = [];
-      // const weatherdata = [];
-
-      // const axes = [{ primary: true, type: 'time', position: 'bottom' },
-      //   { type: 'linear', position: 'left' }];
-
-      // const axes2 = [{ primary: true, type: 'time', position: 'bottom' },
-      //   { type: 'ordinal', position: 'left' }];
-
-      // if (code === '200') {
-      //   for (let i = 0; i < data.length; i += 1) {
-      //     tempdata.push(
-      //       [new Date(`${data[i].dt_txt} UTC`), Math.round(data[i].main.temp)],
-      //     );
-      //     weatherdata.push(
-      //       [new Date(`${data[i].dt_txt} UTC`)],
-      //     );
-      //   }
-      // } else {
-      //   return s.result.message;
-      // }
-
-      // chartdata.push({ label: 'Series 1', data: tempdata, meta: 'hi' });
-      // chart2data.push({ label: 'Series 1', data: weatherdata });
-
-      // return (
-      //   <>
-      //     <div style={{
-      //       width: '100%',
-      //       height: '300px',
-      //     }}
-      //     >
-      //       <Chart data={chartdata} axes={axes} tooltip />
-      //     </div>
-      //     <div style={{
-      //       width: '100%',
-      //       height: '300px',
-      //     }}
-      //     >
-      //       <Chart data={chart2data} axes={axes2} />
-      //     </div>
-      //   </>
-      // );
       const pods = {};
       const data = s.result.list;
       const code = s.result.cod;

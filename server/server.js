@@ -109,7 +109,7 @@ app.get('/wolfram2', function (req, res) {
 
 });
 
-app.get('/weather', function (req, res) {
+app.get('/forecast', function (req, res) {
   axios.get('https://api.openweathermap.org/data/2.5/forecast', {
     params: {
       q: req.query.q,
@@ -126,7 +126,25 @@ app.get('/weather', function (req, res) {
     res.json( error.response.data );
     // console.log( error );
   });
+});
 
+app.get('/weather', function (req, res) {
+  axios.get('https://api.openweathermap.org/data/2.5/weather', {
+    params: {
+      q: req.query.q,
+      mode: 'json',
+      units: 'metric',
+      appid: process.env.WEATHER_KEY,
+    }
+  })
+  .then(function (response) {
+    res.json( response.data );
+    console.log( response.data );
+  })
+  .catch(function (error) {
+    res.json( error.response.data );
+    // console.log( error );
+  });
 });
 
 app.get('/bus', (req, res) => {

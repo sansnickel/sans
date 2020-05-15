@@ -3,7 +3,7 @@ import './Home.scss';
 import TranslinkHome from '../Translink/TranslinkHome';
 import Smart from '../Smart/Smart';
 import FactOfTheDay from '../FactOfTheDay/FactOfTheDay';
-
+import WeatherHome from '../Weather/WeatherHome';
 
 class Home extends Component {
   constructor(props) {
@@ -28,6 +28,11 @@ class Home extends Component {
         <div className="Home__container">
           <div className="Home__container__smart Home__container__section">
             <Smart />
+          </div>
+        </div>
+        <div className="Home__container">
+          <div className="Home__container__weather Home__container__section">
+            <WeatherHome />
           </div>
         </div>
         <div className="Home__container">
